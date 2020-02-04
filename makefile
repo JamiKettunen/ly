@@ -78,7 +78,8 @@ install: $(BIND)/$(NAME)
 	@install -DZ $(RESD)/wsetup.sh -t $(DATADIR)
 	@install -dZ $(DATADIR)/lang
 	@install -DZ $(RESD)/lang/* -t $(DATADIR)/lang
-	@install -DZ $(RESD)/ly.service -t ${DESTDIR}/usr/lib/systemd/system
+	@install -dZ ${DESTDIR}/etc/sv/ly-runit-service
+	@install -DZ $(RESD)/ly-runit-service/* -t ${DESTDIR}/etc/sv/ly-runit-service
 
 installnoconf: $(BIND)/$(NAME)
 	@echo "installing without the configuration file"
@@ -88,14 +89,15 @@ installnoconf: $(BIND)/$(NAME)
 	@install -DZ $(RESD)/wsetup.sh -t $(DATADIR)
 	@install -dZ $(DATADIR)/lang
 	@install -DZ $(RESD)/lang/* -t $(DATADIR)/lang
-	@install -DZ $(RESD)/ly.service -t ${DESTDIR}/usr/lib/systemd/system
+	@install -dZ ${DESTDIR}/etc/sv/ly-runit-service
+	@install -DZ $(RESD)/ly-runit-service/* -t ${DESTDIR}/etc/sv/ly-runit-service
 
 uninstall:
 	@echo "uninstalling"
 	@rm -rf ${DESTDIR}/etc/ly
 	@rm -rf $(DATADIR)
 	@rm -f ${DESTDIR}/usr/bin/ly
-	@rm -f ${DESTDIR}/usr/lib/systemd/system/ly.service
+	@rm -rf ${DESTDIR}/etc/sv/ly-runit-service
 
 clean:
 	@echo "cleaning"
